@@ -318,10 +318,15 @@ async def generate_responses_multimodal(
         items_by_prompt.append({
             'prompt': comparison_prompt_template,
             'images': opened,
+            'image_paths': img_list,
         })
     
-    # Replicate K times
-    items_k = items_by_prompt * K
+    # Replicate K times (but in logprob mode, force K=1 for efficiency)
+    import os as _os
+    if _os.getenv("USE_LOGPROB_PREF"):
+        items_k = items_by_prompt
+    else:
+        items_k = items_by_prompt * K
 
     # Delegate to agent-specific multimodal batch
     if isinstance(agent, vLLMAgent):

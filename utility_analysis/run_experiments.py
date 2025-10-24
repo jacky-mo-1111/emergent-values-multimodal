@@ -99,7 +99,10 @@ def submit_slurm_job(
     time_limit: str = "2-00:00:00",
     partition: str = "gpu",
     additional_args: Optional[List[str]] = None,
-    experiment_args: Optional[Dict] = None
+    experiment_args: Optional[Dict] = None,
+    internvl_mm_plain: bool = False,
+    mm_debug_first_pair: bool = False,
+    use_logprob_pref: bool = False,
 ) -> None:
     """Submit a Slurm job for the specified experiment/script."""
     output_dir = os.path.join("slurm_outputs", experiment_name)
@@ -144,6 +147,13 @@ def submit_slurm_job(
         "# Initialize and load conda",
         "source /data/mantas_mazeika/miniconda3/etc/profile.d/conda.sh",
         f"conda activate {CONDA_ENV_NAME}",
+        "",
+        # Optionally enable InternVL plain multimodal prompt
+        *( ["export INTERNVL_MM_PLAIN=1"] if internvl_mm_plain else [] ),
+        # Optionally enable multimodal first-pair debug
+        *( ["export MM_DEBUG_FIRST_PAIR=1"] if mm_debug_first_pair else [] ),
+        # Optionally enable logprob-based preference
+        *( ["export USE_LOGPROB_PREF=1"] if use_logprob_pref else [] ),
         "",
         "# Run the experiment",
         " ".join(python_cmd)
@@ -240,9 +250,17 @@ def main():
     # New: multimodal toggle
     parser.add_argument("--multimodal", action="store_true",
                         help="Use multimodal image comparison prompts and options")
+    parser.add_argument("--use_logprob_pref", action="store_true",
+                        help="For multimodal: use single-step logprob-based A/B decision (deterministic)")
     # New: output path override
     parser.add_argument("--output_path", type=str,
                         help="Override the experiment save_dir (supports <model_key> templating)")
+    # InternVL multimodal plain prompt toggle
+    parser.add_argument("--internvl_mm_plain", action="store_true",
+                        help="Use plain <image> multimodal prompt for InternVL models (no chat template)")
+    # Multimodal debug: describe first pair's images then abort
+    parser.add_argument("--mm_debug_first_pair", action="store_true",
+                        help="For multimodal: ask model to describe image A/B of the first pair, print, then exit")
     
     args = parser.parse_args()
     
@@ -350,10 +368,20 @@ def main():
                         model_key=model_key,
                         time_limit=args.time_limit,
                         partition=args.partition,
-                        additional_args=args.additional_args,
-                        experiment_args=experiment_args
+                        additional_args=(args.additional_args or []),
+                        experiment_args=experiment_args,
+                        internvl_mm_plain=args.internvl_mm_plain,
+                        mm_debug_first_pair=args.mm_debug_first_pair,
+                        use_logprob_pref=args.use_logprob_pref,
                     )
                 else:
+                    # Set environment variable for local run if flag is set
+                    if args.internvl_mm_plain:
+                        os.environ["INTERNVL_MM_PLAIN"] = "1"
+                    if args.mm_debug_first_pair:
+                        os.environ["MM_DEBUG_FIRST_PAIR"] = "1"
+                    if args.use_logprob_pref:
+                        os.environ["USE_LOGPROB_PREF"] = "1"
                     run_locally(
                         script_path=experiment_config.script_path,
                         additional_args=args.additional_args,

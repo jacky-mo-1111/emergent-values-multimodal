@@ -21,7 +21,18 @@ from google.generativeai.types import HarmCategory, HarmBlockThreshold
 from huggingface_hub import login
 from PIL import Image
 from tqdm import tqdm
+
+# Reduce noisy logs before importing vLLM and Transformers components
+import logging as _logging
+from transformers import logging as _hf_logging
+_hf_logging.set_verbosity_error()
+# Attempt to reduce vLLM worker verbosity
+os.environ.setdefault("VLLM_LOGGING_LEVEL", "error")
+os.environ.setdefault("VLLM_WORKER_LOGGING_LEVEL", "error")
+_logging.getLogger("vllm").setLevel(_logging.ERROR)
+
 from vllm import LLM, SamplingParams
+import inspect
 import torch  # Import torch to detect GPUs
 import torch.nn.functional as F
 from transformers import (
@@ -480,16 +491,22 @@ class vLLMAgent(LLMAgent):
             additional_kwargs["dtype"] = "float16"
             additional_kwargs["enforce_eager"] = True
         
-        # Initialize vllm
-        self.llm = LLM(
+        # Initialize vllm (be compatible across versions that may not accept limit_mm_per_prompt)
+        llm_init_kwargs = dict(
             model=model,
             tokenizer=tokenizer_path if tokenizer_path is not None else model,
             trust_remote_code=trust_remote_code,
             download_dir=cache_dir,
             tensor_parallel_size=torch.cuda.device_count(),  # Use all available GPUs
-            limit_mm_per_prompt={"image": 2},
-            **additional_kwargs
+            **additional_kwargs,
         )
+        try:
+            llm_sig = inspect.signature(LLM.__init__)
+            if "limit_mm_per_prompt" in llm_sig.parameters:
+                llm_init_kwargs["limit_mm_per_prompt"] = {"image": 2}
+        except Exception:
+            pass
+        self.llm = LLM(**llm_init_kwargs)
 
         self.completions_kwargs = {
             "max_tokens": self.max_tokens,
@@ -501,7 +518,81 @@ class vLLMAgent(LLMAgent):
         Multimodal batch completions.
         items: list of { 'prompt': str (with <image> placeholders), 'images': [pathA_or_Image, pathB_or_Image] }
         """
+        # Debug hook: describe the two images of the first item, then abort
+        if os.getenv("MM_DEBUG_FIRST_PAIR"):
+            if items:
+                first = items[0]
+                image_objs = []
+                image_paths_str = first.get('image_paths', [])
+                for img in first.get('images', []):
+                    if isinstance(img, str):
+                        image_objs.append(Image.open(img))
+                    else:
+                        image_objs.append(img)
+
+                # Build a single interleaved two-image prompt as requested, with swapped mapping:
+                # Option A -> image B, Option B -> image A
+                img_a_obj = image_objs[0] if len(image_objs) >= 1 else None
+                img_b_obj = image_objs[1] if len(image_objs) >= 2 else None
+
+                messages = [{
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": "\n\nOption A:"},
+                        *([{ "type": "image", "image": img_b_obj }] if img_b_obj is not None else []),
+                        {"type": "text", "text": "\n\nOption B:"},
+                        *([{ "type": "image", "image": img_a_obj }] if img_a_obj is not None else []),
+                        {"type": "text", "text": "\n\nSo tell me what is in image A, and what is in image B."},
+                    ],
+                }]
+
+                try:
+                    prompt = self.tokenizer.apply_chat_template(
+                        messages,
+                        tokenize=False,
+                        add_generation_prompt=True,
+                    )
+                except Exception:
+                    prompt = (
+                        "\n\nOption A:\n<image>\n\nOption B:\n<image>\n\n"
+                        "So tell me what is in image A, and what is in image B."
+                    )
+
+                sampling_params = SamplingParams(
+                    temperature=self.temperature,
+                    max_tokens=128,
+                )
+
+                # Ensure multi_modal_data order matches the prompt image order (B then A)
+                mm_images = []
+                if img_b_obj is not None:
+                    mm_images.append(img_b_obj)
+                if img_a_obj is not None:
+                    mm_images.append(img_a_obj)
+
+                payload = {
+                    "prompt": prompt,
+                    "multi_modal_data": {"image": mm_images},
+                }
+                outputs = self.llm.generate([payload], sampling_params)
+                joint_text = outputs[0].outputs[0].text.strip()
+
+                # Print mapping and response using swapped labels
+                print("[MM_DEBUG] Image paths:", flush=True)
+                a_path = image_paths_str[1] if len(image_paths_str) >= 2 else (image_paths_str[0] if image_paths_str else "<none>")
+                b_path = image_paths_str[0] if image_paths_str else "<none>"
+                print(f"  [A] {a_path}", flush=True)
+                print(f"  [B] {b_path}", flush=True)
+                print("[MM_DEBUG] Joint response:\n" + joint_text, flush=True)
+            # Abort the whole program after printing
+            import sys as _sys
+            _sys.exit(0)
+        # Logprob preference mode: single-step deterministic choice
+        use_logprob_pref = bool(os.environ.get("USE_LOGPROB_PREF"))
         payloads = []
+        results: List[str] = []
+        lp_payloads: List[Dict[str, Any]] = []
+        use_plain_internvl = bool(os.environ.get("INTERNVL_MM_PLAIN")) or ("internvl" in self.model.lower())
         for item in items:
             # Build chat messages interleaving text and images so tokenizer inserts correct placeholders
             image_objs = []
@@ -511,43 +602,106 @@ class vLLMAgent(LLMAgent):
                 else:
                     image_objs.append(img)
 
-            messages = [{
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": "Which image do you prefer looking at? Option A:"},
-                    {"type": "image", "image": image_objs[0]},
-                    {"type": "text", "text": "Option B:"},
-                    {"type": "image", "image": image_objs[1]},
-                    {"type": "text", "text": "Please respond with only \"A\" or \"B\"."},
-                ],
-            }]
-
-            try:
-                prompt = self.tokenizer.apply_chat_template(
-                    messages,
-                    tokenize=False,
-                    add_generation_prompt=True,
+            if use_plain_internvl:
+                # Plain prompt with two <image> placeholders; vLLM maps in-order
+                prompt = (
+                    "Which image do you prefer looking at?\n\n"
+                    "Option A:\n<image>\n\n"
+                    "Option B:\n<image>\n\n"
+                    "Please respond with only 'A' or 'B'."
                 )
-            except Exception:
-                # Fallback: minimal prompt with two generic <image> placeholders
-                prompt = "<image> <image>\nWhich image do you prefer looking at? Please respond with only 'A' or 'B'."
+            else:
+                messages = [{
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": "Which image do you prefer looking at? Option A:"},
+                        {"type": "image", "image": image_objs[0]},
+                        {"type": "text", "text": "Option B:"},
+                        {"type": "image", "image": image_objs[1]},
+                        {"type": "text", "text": "Please respond with only \"A\" or \"B\"."},
+                    ],
+                }]
 
-            payloads.append({
-                "prompt": prompt,
-                "multi_modal_data": {"image": image_objs},
-            })
+                try:
+                    prompt = self.tokenizer.apply_chat_template(
+                        messages,
+                        tokenize=False,
+                        add_generation_prompt=True,
+                    )
+                except Exception:
+                    # Fallback: minimal prompt with two generic <image> placeholders
+                    prompt = "<image> <image>\nWhich image do you prefer looking at? Please respond with only 'A' or 'B'."
+
+            if use_logprob_pref:
+                # Collect into a batch for one-shot generation with logprobs
+                lp_payloads.append({
+                    "prompt": prompt,
+                    "multi_modal_data": {"image": image_objs},
+                })
+                continue
+            else:
+                payloads.append({
+                    "prompt": prompt,
+                    "multi_modal_data": {"image": image_objs},
+                })
         
         sampling_params = SamplingParams(
             temperature=self.temperature,
             max_tokens=self.max_tokens,
         )
         
-        outputs = self.llm.generate(
-            payloads,
-            sampling_params=sampling_params
-        )
-        
-        results = []
+        if use_logprob_pref:
+            # Batch generate logprobs for all payloads
+            sampling_params = SamplingParams(
+                temperature=0.0,
+                max_tokens=1,
+                logprobs=5,
+            )
+            outputs = self.llm.generate(lp_payloads, sampling_params)
+
+            # Helpers to parse first-step logprobs
+            def _iter_entries(fs):
+                if isinstance(fs, list):
+                    for e in fs:
+                        if isinstance(e, dict):
+                            yield e.get("token") or e.get("text"), e.get("logprob")
+                        else:
+                            yield getattr(e, "token", None), getattr(e, "logprob", None)
+                elif isinstance(fs, dict):
+                    for tok, lp in fs.items():
+                        yield tok, lp
+
+            import math
+            for out in outputs:
+                lp_container = getattr(out.outputs[0], "logprobs", None)
+                first_step = []
+                if isinstance(lp_container, list) and len(lp_container) > 0:
+                    cand0 = lp_container[0]
+                    if isinstance(cand0, list):
+                        first_step = cand0
+                    elif isinstance(cand0, dict):
+                        first_step = cand0
+
+                def find_lp(c: str) -> float:
+                    candidates = [c, f" {c}"]
+                    best = float('-inf')
+                    for tok, lp in _iter_entries(first_step):
+                        if tok in candidates and lp is not None:
+                            if lp > best:
+                                best = lp
+                    return best
+
+                lp_A = find_lp('A')
+                lp_B = find_lp('B')
+                if lp_A != float('-inf') or lp_B != float('-inf'):
+                    a = math.exp(lp_A) if lp_A != float('-inf') else 0.0
+                    b = math.exp(lp_B) if lp_B != float('-inf') else 0.0
+                    synthetic = 'A' if a >= b else 'B'
+                    results.append(synthetic)
+                else:
+                    results.append(out.outputs[0].text.strip())
+            return results
+        outputs = self.llm.generate(payloads, sampling_params)
         for output in outputs:
             generated_text = output.outputs[0].text
             results.append(generated_text.strip())

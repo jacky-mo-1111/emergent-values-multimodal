@@ -1,0 +1,13 @@
+
+Computing utilities for /data/wenjie_jacky_mo/emergent-values/utility_analysis/shared_options/country_flag.json...
+NCCL version 2.26.2+cuda12.2
+Total possible edges: 32131
+Training pool: 31131, Holdout: 1000
+Resuming from checkpoint: /data/wenjie_jacky_mo/emergent-values/utility_analysis/outputs/qwen_32b/country_flag/checkpoints_qwen25-vl-32b-instruct/ckpt_iter_0005.json
+Target total edges: 4058
+Initial edges: 254
+Number of iterations: 8
+
+Iteration 6/8
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)

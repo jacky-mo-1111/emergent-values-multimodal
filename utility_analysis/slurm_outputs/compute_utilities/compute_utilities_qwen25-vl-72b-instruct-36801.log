@@ -1,0 +1,74 @@
+
+Computing utilities for /data/wenjie_jacky_mo/emergent-values/utility_analysis/shared_options/country_flag.json...
+NCCL version 2.26.2+cuda12.2
+Total possible edges: 32131
+Training pool: 31131, Holdout: 1000
+Resuming from checkpoint: /data/wenjie_jacky_mo/emergent-values/utility_analysis/outputs/qwen_72b/country_flag/checkpoints_qwen25-vl-72b-instruct/ckpt_iter_0005.json
+Target total edges: 4058
+Initial edges: 254
+Number of iterations: 8
+
+Iteration 6/8
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6554
+Epoch 200, Loss: 0.6519
+Epoch 300, Loss: 0.6514
+Epoch 400, Loss: 0.6511
+Epoch 500, Loss: 0.6510
+Epoch 600, Loss: 0.6509
+Epoch 700, Loss: 0.6509
+Epoch 800, Loss: 0.6508
+Epoch 900, Loss: 0.6508
+Updated model - Log Loss: 0.6508, Accuracy: 75.51%
+
+Iteration 7/8
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6597
+Epoch 200, Loss: 0.6567
+Epoch 300, Loss: 0.6563
+Epoch 400, Loss: 0.6561
+Epoch 500, Loss: 0.6560
+Epoch 600, Loss: 0.6559
+Epoch 700, Loss: 0.6559
+Epoch 800, Loss: 0.6558
+Epoch 900, Loss: 0.6558
+Updated model - Log Loss: 0.6557, Accuracy: 73.36%
+
+Iteration 8/8
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6626
+Epoch 200, Loss: 0.6599
+Epoch 300, Loss: 0.6596
+Epoch 400, Loss: 0.6594
+Epoch 500, Loss: 0.6593
+Epoch 600, Loss: 0.6593
+Epoch 700, Loss: 0.6592
+Epoch 800, Loss: 0.6592
+Epoch 900, Loss: 0.6592
+Updated model - Log Loss: 0.6591, Accuracy: 72.52%
+
+Generating pseudolabels using the current Thurstonian model.
+Number of pseudolabels added: 3278
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.4145
+Epoch 200, Loss: 0.3829
+Epoch 300, Loss: 0.3781
+Epoch 400, Loss: 0.3763
+Epoch 500, Loss: 0.3754
+Epoch 600, Loss: 0.3750
+Epoch 700, Loss: 0.3747
+Epoch 800, Loss: 0.3745
+Epoch 900, Loss: 0.3745
+Final model with pseudolabels - Log Loss: 0.3744, Accuracy: 84.25%

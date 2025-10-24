@@ -1,0 +1,41 @@
+
+Computing utilities for /data/wenjie_jacky_mo/emergent-values/utility_analysis/shared_options/country_flag.json...
+NCCL version 2.26.2+cuda12.2
+Total possible edges: 32131
+Training pool: 31131, Holdout: 1000
+Target total edges: 4058
+Initial edges: 254
+Number of iterations: 8
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6880
+Epoch 200, Loss: 0.6877
+Epoch 300, Loss: 0.6877
+Epoch 400, Loss: 0.6877
+Epoch 500, Loss: 0.6877
+Epoch 600, Loss: 0.6877
+Epoch 700, Loss: 0.6877
+Epoch 800, Loss: 0.6877
+Epoch 900, Loss: 0.6877
+
+Iteration 1/8
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6885
+Epoch 200, Loss: 0.6873
+Epoch 300, Loss: 0.6870
+Epoch 400, Loss: 0.6869
+Epoch 500, Loss: 0.6868
+Epoch 600, Loss: 0.6868
+Epoch 700, Loss: 0.6868
+Epoch 800, Loss: 0.6868
+Epoch 900, Loss: 0.6867
+Updated model - Log Loss: 0.6867, Accuracy: 49.60%
+
+Iteration 2/8
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)

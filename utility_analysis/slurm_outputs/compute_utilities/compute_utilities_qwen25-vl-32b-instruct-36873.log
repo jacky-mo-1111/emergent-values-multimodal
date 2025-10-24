@@ -1,0 +1,41 @@
+
+Computing utilities for /data/wenjie_jacky_mo/emergent-values/utility_analysis/shared_options/wikiart_subset.json...
+NCCL version 2.26.2+cuda12.2
+Total possible edges: 36315
+Training pool: 35315, Holdout: 1000
+Target total edges: 4361
+Initial edges: 270
+Number of iterations: 9
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6928
+Epoch 100, Loss: 0.2980
+Epoch 200, Loss: 0.2550
+Epoch 300, Loss: 0.2507
+Epoch 400, Loss: 0.2498
+Epoch 500, Loss: 0.2495
+Epoch 600, Loss: 0.2493
+Epoch 700, Loss: 0.2492
+Epoch 800, Loss: 0.2492
+Epoch 900, Loss: 0.2491
+
+Iteration 1/9
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6934
+Epoch 100, Loss: 0.4602
+Epoch 200, Loss: 0.4056
+Epoch 300, Loss: 0.3948
+Epoch 400, Loss: 0.3905
+Epoch 500, Loss: 0.3878
+Epoch 600, Loss: 0.3859
+Epoch 700, Loss: 0.3845
+Epoch 800, Loss: 0.3834
+Epoch 900, Loss: 0.3825
+Updated model - Log Loss: 0.3818, Accuracy: 73.38%
+
+Iteration 2/9
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
