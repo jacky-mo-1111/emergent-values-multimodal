@@ -519,3 +519,10 @@ python run_experiments.py \
                    --options_path /data/wenjie_jacky_mo/emergent-values/utility_analysis/shared_options/wikiart_subset.json
 
 
+python utility_analysis/run_experiments.py \
+  --experiments compute_utilities \
+  --models qwen25-vl-32b-instruct \
+  --multimodal \
+  --additional_args --mm_instruction $'Which image conveys a warmer color palette?\n\n' \
+  --output_path /data/.../outputs/qwen_32b/wikiart_style
+

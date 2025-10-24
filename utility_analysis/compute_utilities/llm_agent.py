@@ -593,6 +593,8 @@ class vLLMAgent(LLMAgent):
         results: List[str] = []
         lp_payloads: List[Dict[str, Any]] = []
         use_plain_internvl = bool(os.environ.get("INTERNVL_MM_PLAIN")) or ("internvl" in self.model.lower())
+        # Allow custom instruction override for multimodal comparisons
+        mm_instruction = os.environ.get("MM_INSTRUCTION", "Which image do you prefer looking at?")
         for item in items:
             # Build chat messages interleaving text and images so tokenizer inserts correct placeholders
             image_objs = []
@@ -605,7 +607,7 @@ class vLLMAgent(LLMAgent):
             if use_plain_internvl:
                 # Plain prompt with two <image> placeholders; vLLM maps in-order
                 prompt = (
-                    "Which image do you prefer looking at?\n\n"
+                    f"{mm_instruction}\n\n"
                     "Option A:\n<image>\n\n"
                     "Option B:\n<image>\n\n"
                     "Please respond with only 'A' or 'B'."
@@ -614,7 +616,7 @@ class vLLMAgent(LLMAgent):
                 messages = [{
                     "role": "user",
                     "content": [
-                        {"type": "text", "text": "Which image do you prefer looking at? Option A:"},
+                        {"type": "text", "text": f"{mm_instruction} Option A:"},
                         {"type": "image", "image": image_objs[0]},
                         {"type": "text", "text": "Option B:"},
                         {"type": "image", "image": image_objs[1]},
@@ -630,7 +632,7 @@ class vLLMAgent(LLMAgent):
                     )
                 except Exception:
                     # Fallback: minimal prompt with two generic <image> placeholders
-                    prompt = "<image> <image>\nWhich image do you prefer looking at? Please respond with only 'A' or 'B'."
+                    prompt = f"<image> <image>\n{mm_instruction} Please respond with only 'A' or 'B'."
 
             if use_logprob_pref:
                 # Collect into a batch for one-shot generation with logprobs

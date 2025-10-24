@@ -39,3 +39,54 @@ Updated model - Log Loss: 0.6867, Accuracy: 49.60%
 Iteration 2/8
 Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
 Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6892
+Epoch 200, Loss: 0.6873
+Epoch 300, Loss: 0.6868
+Epoch 400, Loss: 0.6866
+Epoch 500, Loss: 0.6865
+Epoch 600, Loss: 0.6864
+Epoch 700, Loss: 0.6864
+Epoch 800, Loss: 0.6864
+Epoch 900, Loss: 0.6863
+Updated model - Log Loss: 0.6863, Accuracy: 49.44%
+
+Iteration 3/8
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6901
+Epoch 200, Loss: 0.6885
+Epoch 300, Loss: 0.6879
+Epoch 400, Loss: 0.6877
+Epoch 500, Loss: 0.6876
+Epoch 600, Loss: 0.6876
+Epoch 700, Loss: 0.6875
+Epoch 800, Loss: 0.6875
+Epoch 900, Loss: 0.6875
+Updated model - Log Loss: 0.6875, Accuracy: 49.83%
+
+Iteration 4/8
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6893
+Epoch 200, Loss: 0.6873
+Epoch 300, Loss: 0.6864
+Epoch 400, Loss: 0.6860
+Epoch 500, Loss: 0.6859
+Epoch 600, Loss: 0.6858
+Epoch 700, Loss: 0.6857
+Epoch 800, Loss: 0.6857
+Epoch 900, Loss: 0.6857
+Updated model - Log Loss: 0.6856, Accuracy: 51.91%
+
+Iteration 5/8
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)

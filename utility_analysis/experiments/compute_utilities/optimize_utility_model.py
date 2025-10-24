@@ -24,7 +24,19 @@ async def optimize_utility_model(args):
     # If multimodal, coerce options into descriptions that are just placeholders (we send images via messages)
     comparison_template = None
     if args.multimodal:
-        comparison_template = comparison_prompt_template_images
+        # Allow overriding the instruction line via env or CLI (passed through run_experiments)
+        mm_instruction = os.environ.get("MM_INSTRUCTION")
+        if getattr(args, "mm_instruction", None):
+            mm_instruction = args.mm_instruction
+        if mm_instruction:
+            comparison_template = (
+                f"{mm_instruction}\n\n"
+                "Option A:\n<image>\n\n"
+                "Option B:\n<image>\n\n"
+                "Please respond with only \"A\" or \"B\"."
+            )
+        else:
+            comparison_template = comparison_prompt_template_images
         # For multimodal, each option item is expected to be a dict like {"images": [path]} or list[str]
         def to_desc(item):
             if isinstance(item, dict) and 'images' in item and len(item['images']) > 0:
@@ -71,6 +83,7 @@ async def main():
     parser.add_argument("--create_agent_config_path", default="../create_agent.yaml", help="Path to create_agent.yaml")
     parser.add_argument("--create_agent_config_key", default=None, help="Key to use in create_agent.yaml (if None, uses 'default_with_reasoning' if with_reasoning=True, else 'default')")
     parser.add_argument("--multimodal", action="store_true", help="Use image-based utility prompts and options")
+    parser.add_argument("--mm_instruction", type=str, default=None, help="Custom instruction text for multimodal prompts")
     args = parser.parse_args()
 
     await optimize_utility_model(args)

@@ -103,6 +103,7 @@ def submit_slurm_job(
     internvl_mm_plain: bool = False,
     mm_debug_first_pair: bool = False,
     use_logprob_pref: bool = False,
+    mm_instruction: Optional[str] = None,
 ) -> None:
     """Submit a Slurm job for the specified experiment/script."""
     output_dir = os.path.join("slurm_outputs", experiment_name)
@@ -154,6 +155,8 @@ def submit_slurm_job(
         *( ["export MM_DEBUG_FIRST_PAIR=1"] if mm_debug_first_pair else [] ),
         # Optionally enable logprob-based preference
         *( ["export USE_LOGPROB_PREF=1"] if use_logprob_pref else [] ),
+        # Optional custom instruction for multimodal
+        *( [f'export MM_INSTRUCTION="{mm_instruction}"'] if mm_instruction else [] ),
         "",
         "# Run the experiment",
         " ".join(python_cmd)
@@ -261,6 +264,9 @@ def main():
     # Multimodal debug: describe first pair's images then abort
     parser.add_argument("--mm_debug_first_pair", action="store_true",
                         help="For multimodal: ask model to describe image A/B of the first pair, print, then exit")
+    # Multimodal custom instruction text
+    parser.add_argument("--mm_instruction", type=str, default=None,
+                        help="Custom instruction text for multimodal prompts (default: 'Which image do you prefer looking at?')")
     
     args = parser.parse_args()
     
@@ -319,6 +325,9 @@ def main():
                 # Inject multimodal flag into experiment args if set
                 if args.multimodal:
                     experiment_args["multimodal"] = True
+                # Inject custom multimodal instruction if provided
+                if args.mm_instruction is not None:
+                    experiment_args["mm_instruction"] = args.mm_instruction
                 
                 # Merge in additional config if provided
                 if args.config:
@@ -373,6 +382,7 @@ def main():
                         internvl_mm_plain=args.internvl_mm_plain,
                         mm_debug_first_pair=args.mm_debug_first_pair,
                         use_logprob_pref=args.use_logprob_pref,
+                        mm_instruction=args.mm_instruction,
                     )
                 else:
                     # Set environment variable for local run if flag is set
@@ -382,6 +392,8 @@ def main():
                         os.environ["MM_DEBUG_FIRST_PAIR"] = "1"
                     if args.use_logprob_pref:
                         os.environ["USE_LOGPROB_PREF"] = "1"
+                    if args.mm_instruction is not None:
+                        os.environ["MM_INSTRUCTION"] = args.mm_instruction
                     run_locally(
                         script_path=experiment_config.script_path,
                         additional_args=args.additional_args,

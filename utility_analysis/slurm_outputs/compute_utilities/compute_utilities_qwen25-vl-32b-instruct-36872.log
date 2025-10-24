@@ -231,3 +231,410 @@ Number of unparseable responses: 0
 Epoch 0, Loss: 0.6932
 Epoch 100, Loss: 0.5884
 Epoch 200, Loss: 0.5534
+Epoch 300, Loss: 0.5438
+Epoch 400, Loss: 0.5391
+Epoch 500, Loss: 0.5362
+Epoch 600, Loss: 0.5342
+Epoch 700, Loss: 0.5328
+Epoch 800, Loss: 0.5318
+Epoch 900, Loss: 0.5311
+Updated model - Log Loss: 0.5304, Accuracy: 65.36%
+
+Iteration 14/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.5940
+Epoch 200, Loss: 0.5608
+Epoch 300, Loss: 0.5518
+Epoch 400, Loss: 0.5473
+Epoch 500, Loss: 0.5444
+Epoch 600, Loss: 0.5425
+Epoch 700, Loss: 0.5411
+Epoch 800, Loss: 0.5402
+Epoch 900, Loss: 0.5394
+Updated model - Log Loss: 0.5388, Accuracy: 64.81%
+
+Iteration 15/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6931
+Epoch 100, Loss: 0.5992
+Epoch 200, Loss: 0.5678
+Epoch 300, Loss: 0.5593
+Epoch 400, Loss: 0.5551
+Epoch 500, Loss: 0.5524
+Epoch 600, Loss: 0.5506
+Epoch 700, Loss: 0.5493
+Epoch 800, Loss: 0.5483
+Epoch 900, Loss: 0.5476
+Updated model - Log Loss: 0.5470, Accuracy: 63.87%
+
+Iteration 16/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6040
+Epoch 200, Loss: 0.5743
+Epoch 300, Loss: 0.5661
+Epoch 400, Loss: 0.5621
+Epoch 500, Loss: 0.5596
+Epoch 600, Loss: 0.5579
+Epoch 700, Loss: 0.5567
+Epoch 800, Loss: 0.5558
+Epoch 900, Loss: 0.5551
+Updated model - Log Loss: 0.5545, Accuracy: 63.47%
+
+Iteration 17/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6080
+Epoch 200, Loss: 0.5799
+Epoch 300, Loss: 0.5722
+Epoch 400, Loss: 0.5685
+Epoch 500, Loss: 0.5661
+Epoch 600, Loss: 0.5645
+Epoch 700, Loss: 0.5634
+Epoch 800, Loss: 0.5626
+Epoch 900, Loss: 0.5619
+Updated model - Log Loss: 0.5614, Accuracy: 62.85%
+
+Iteration 18/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6931
+Epoch 100, Loss: 0.6121
+Epoch 200, Loss: 0.5851
+Epoch 300, Loss: 0.5778
+Epoch 400, Loss: 0.5742
+Epoch 500, Loss: 0.5720
+Epoch 600, Loss: 0.5705
+Epoch 700, Loss: 0.5694
+Epoch 800, Loss: 0.5686
+Epoch 900, Loss: 0.5681
+Updated model - Log Loss: 0.5676, Accuracy: 62.50%
+
+Iteration 19/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6933
+Epoch 100, Loss: 0.6157
+Epoch 200, Loss: 0.5899
+Epoch 300, Loss: 0.5829
+Epoch 400, Loss: 0.5795
+Epoch 500, Loss: 0.5774
+Epoch 600, Loss: 0.5760
+Epoch 700, Loss: 0.5750
+Epoch 800, Loss: 0.5742
+Epoch 900, Loss: 0.5736
+Updated model - Log Loss: 0.5732, Accuracy: 62.10%
+
+Iteration 20/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6187
+Epoch 200, Loss: 0.5939
+Epoch 300, Loss: 0.5872
+Epoch 400, Loss: 0.5838
+Epoch 500, Loss: 0.5817
+Epoch 600, Loss: 0.5804
+Epoch 700, Loss: 0.5794
+Epoch 800, Loss: 0.5786
+Epoch 900, Loss: 0.5781
+Updated model - Log Loss: 0.5776, Accuracy: 61.80%
+
+Iteration 21/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6931
+Epoch 100, Loss: 0.6217
+Epoch 200, Loss: 0.5982
+Epoch 300, Loss: 0.5917
+Epoch 400, Loss: 0.5885
+Epoch 500, Loss: 0.5865
+Epoch 600, Loss: 0.5851
+Epoch 700, Loss: 0.5841
+Epoch 800, Loss: 0.5834
+Epoch 900, Loss: 0.5829
+Updated model - Log Loss: 0.5824, Accuracy: 61.64%
+
+Iteration 22/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6931
+Epoch 100, Loss: 0.6243
+Epoch 200, Loss: 0.6016
+Epoch 300, Loss: 0.5953
+Epoch 400, Loss: 0.5923
+Epoch 500, Loss: 0.5903
+Epoch 600, Loss: 0.5891
+Epoch 700, Loss: 0.5881
+Epoch 800, Loss: 0.5875
+Epoch 900, Loss: 0.5869
+Updated model - Log Loss: 0.5865, Accuracy: 61.40%
+
+Iteration 23/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6268
+Epoch 200, Loss: 0.6049
+Epoch 300, Loss: 0.5988
+Epoch 400, Loss: 0.5958
+Epoch 500, Loss: 0.5939
+Epoch 600, Loss: 0.5927
+Epoch 700, Loss: 0.5918
+Epoch 800, Loss: 0.5911
+Epoch 900, Loss: 0.5906
+Updated model - Log Loss: 0.5902, Accuracy: 61.34%
+
+Iteration 24/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6290
+Epoch 200, Loss: 0.6079
+Epoch 300, Loss: 0.6021
+Epoch 400, Loss: 0.5992
+Epoch 500, Loss: 0.5973
+Epoch 600, Loss: 0.5961
+Epoch 700, Loss: 0.5952
+Epoch 800, Loss: 0.5946
+Epoch 900, Loss: 0.5941
+Updated model - Log Loss: 0.5937, Accuracy: 61.07%
+
+Iteration 25/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6933
+Epoch 100, Loss: 0.6314
+Epoch 200, Loss: 0.6110
+Epoch 300, Loss: 0.6052
+Epoch 400, Loss: 0.6023
+Epoch 500, Loss: 0.6005
+Epoch 600, Loss: 0.5993
+Epoch 700, Loss: 0.5984
+Epoch 800, Loss: 0.5978
+Epoch 900, Loss: 0.5973
+Updated model - Log Loss: 0.5969, Accuracy: 60.76%
+
+Iteration 26/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6335
+Epoch 200, Loss: 0.6137
+Epoch 300, Loss: 0.6081
+Epoch 400, Loss: 0.6053
+Epoch 500, Loss: 0.6035
+Epoch 600, Loss: 0.6023
+Epoch 700, Loss: 0.6015
+Epoch 800, Loss: 0.6009
+Epoch 900, Loss: 0.6005
+Updated model - Log Loss: 0.6001, Accuracy: 60.58%
+
+Iteration 27/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6354
+Epoch 200, Loss: 0.6162
+Epoch 300, Loss: 0.6108
+Epoch 400, Loss: 0.6081
+Epoch 500, Loss: 0.6063
+Epoch 600, Loss: 0.6052
+Epoch 700, Loss: 0.6044
+Epoch 800, Loss: 0.6038
+Epoch 900, Loss: 0.6034
+Updated model - Log Loss: 0.6031, Accuracy: 60.39%
+
+Iteration 28/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6931
+Epoch 100, Loss: 0.6369
+Epoch 200, Loss: 0.6184
+Epoch 300, Loss: 0.6133
+Epoch 400, Loss: 0.6107
+Epoch 500, Loss: 0.6091
+Epoch 600, Loss: 0.6080
+Epoch 700, Loss: 0.6072
+Epoch 800, Loss: 0.6066
+Epoch 900, Loss: 0.6062
+Updated model - Log Loss: 0.6058, Accuracy: 60.15%
+
+Iteration 29/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6386
+Epoch 200, Loss: 0.6205
+Epoch 300, Loss: 0.6154
+Epoch 400, Loss: 0.6129
+Epoch 500, Loss: 0.6114
+Epoch 600, Loss: 0.6104
+Epoch 700, Loss: 0.6096
+Epoch 800, Loss: 0.6090
+Epoch 900, Loss: 0.6086
+Updated model - Log Loss: 0.6083, Accuracy: 60.55%
+
+Iteration 30/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6402
+Epoch 200, Loss: 0.6227
+Epoch 300, Loss: 0.6178
+Epoch 400, Loss: 0.6154
+Epoch 500, Loss: 0.6139
+Epoch 600, Loss: 0.6130
+Epoch 700, Loss: 0.6122
+Epoch 800, Loss: 0.6117
+Epoch 900, Loss: 0.6113
+Updated model - Log Loss: 0.6110, Accuracy: 60.12%
+
+Iteration 31/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6416
+Epoch 200, Loss: 0.6244
+Epoch 300, Loss: 0.6196
+Epoch 400, Loss: 0.6173
+Epoch 500, Loss: 0.6160
+Epoch 600, Loss: 0.6150
+Epoch 700, Loss: 0.6143
+Epoch 800, Loss: 0.6138
+Epoch 900, Loss: 0.6135
+Updated model - Log Loss: 0.6132, Accuracy: 59.99%
+
+Iteration 32/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6429
+Epoch 200, Loss: 0.6261
+Epoch 300, Loss: 0.6215
+Epoch 400, Loss: 0.6192
+Epoch 500, Loss: 0.6178
+Epoch 600, Loss: 0.6169
+Epoch 700, Loss: 0.6163
+Epoch 800, Loss: 0.6158
+Epoch 900, Loss: 0.6155
+Updated model - Log Loss: 0.6152, Accuracy: 60.02%
+
+Iteration 33/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6442
+Epoch 200, Loss: 0.6278
+Epoch 300, Loss: 0.6232
+Epoch 400, Loss: 0.6211
+Epoch 500, Loss: 0.6198
+Epoch 600, Loss: 0.6189
+Epoch 700, Loss: 0.6183
+Epoch 800, Loss: 0.6178
+Epoch 900, Loss: 0.6175
+Updated model - Log Loss: 0.6173, Accuracy: 59.55%
+
+Iteration 34/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6931
+Epoch 100, Loss: 0.6454
+Epoch 200, Loss: 0.6295
+Epoch 300, Loss: 0.6251
+Epoch 400, Loss: 0.6230
+Epoch 500, Loss: 0.6217
+Epoch 600, Loss: 0.6208
+Epoch 700, Loss: 0.6202
+Epoch 800, Loss: 0.6198
+Epoch 900, Loss: 0.6194
+Updated model - Log Loss: 0.6192, Accuracy: 59.52%
+
+Iteration 35/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6931
+Epoch 100, Loss: 0.6465
+Epoch 200, Loss: 0.6309
+Epoch 300, Loss: 0.6266
+Epoch 400, Loss: 0.6245
+Epoch 500, Loss: 0.6233
+Epoch 600, Loss: 0.6225
+Epoch 700, Loss: 0.6219
+Epoch 800, Loss: 0.6215
+Epoch 900, Loss: 0.6212
+Updated model - Log Loss: 0.6210, Accuracy: 59.64%
+
+Iteration 36/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6477
+Epoch 200, Loss: 0.6325
+Epoch 300, Loss: 0.6283
+Epoch 400, Loss: 0.6263
+Epoch 500, Loss: 0.6251
+Epoch 600, Loss: 0.6243
+Epoch 700, Loss: 0.6238
+Epoch 800, Loss: 0.6234
+Epoch 900, Loss: 0.6231
+Updated model - Log Loss: 0.6229, Accuracy: 59.57%
+
+Iteration 37/38
+Sampling up to 500 new pairs from the intersection of the bottom 10.0% utility differences and bottom 20.0% total degrees.
+Number of additional pairs added: 500 (after possibly scaling P and Q)
+Number of responses longer than expected: 0
+Number of unparseable responses: 0
+Epoch 0, Loss: 0.6932
+Epoch 100, Loss: 0.6486
